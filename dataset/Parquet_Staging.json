@@ -1,0 +1,20 @@
+{
+	"name": "Parquet_Staging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_mittulstgfall2024",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Seattle_Pet_Licenses.parquet",
+				"fileSystem": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
