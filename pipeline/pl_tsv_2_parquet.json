@@ -198,7 +198,7 @@
 					"enableStaging": true,
 					"stagingSettings": {
 						"linkedServiceName": {
-							"referenceName": "ls_mittulstgblobfall2024",
+							"referenceName": "ls_stgblobmittul2024",
 							"type": "LinkedServiceReference"
 						},
 						"path": "snowflakestage"
