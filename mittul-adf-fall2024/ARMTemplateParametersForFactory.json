@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "mittul-adf-fall2024"
+		},
+		"ls_snowflake_demo_password": {
+			"value": ""
+		},
+		"ls_stgblobmittul2024_connectionString": {
+			"value": ""
+		},
+		"ls_mittulstgfall2024_properties_typeProperties_url": {
+			"value": "https://mittulstgfall2024.dfs.core.windows.net/"
+		},
+		"ls_snowflake_demo_properties_typeProperties_database": {
+			"value": "DEV_EDW1"
+		},
+		"ls_stgblobdamg7370_sasUri": {
+			"value": ""
+		}
+	}
+}
