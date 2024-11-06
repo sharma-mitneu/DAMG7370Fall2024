@@ -196,13 +196,6 @@
 						}
 					},
 					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "ls_stgblobdamg7370",
-							"type": "LinkedServiceReference"
-						},
-						"path": "snowflakestage"
-					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
