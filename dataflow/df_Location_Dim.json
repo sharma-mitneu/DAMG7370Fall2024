@@ -1,0 +1,104 @@
+{
+	"name": "df_Location_Dim",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "read_data_geo",
+						"type": "DatasetReference"
+					},
+					"name": "sourcesnowflakestage"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_locationDim",
+						"type": "DatasetReference"
+					},
+					"name": "sourceLocationDIM"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_locationDim",
+						"type": "DatasetReference"
+					},
+					"name": "sinkLocationDIM"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "surrogateKey1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     DI_JOB_ID as string (\"1\")",
+				"}",
+				"source(output(",
+				"          state_fips as string,",
+				"          state as string,",
+				"          state_abbr as string,",
+				"          zipcode as string,",
+				"          county as string,",
+				"          city as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcesnowflakestage",
+				"source(output(",
+				"          MAXLOCATIONSK as decimal(10,0)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'Select NVL(MAX(LOCATION_SK),0) as MaxLocationSK FROM EDW.LOCATION_DIM',",
+				"     format: 'query') ~> sourceLocationDIM",
+				"sourcesnowflakestage, sourceLocationDIM join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 keyGenerate(output(RowNum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 derive(LOCATION_SK = MAXLOCATIONSK + RowNum,",
+				"          DI_JOB_ID = $DI_JOB_ID,",
+				"          DI_CREATED_DT = toString(currentDate(),'yyyy-MM-dd')) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          LOCATION_SK as string,",
+				"          ZIP as string,",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_CREATED_DT as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          LOCATION_SK,",
+				"          ZIP = zipcode,",
+				"          CITY = city,",
+				"          STATE = state,",
+				"          DI_JOB_ID,",
+				"          DI_CREATED_DT",
+				"     )) ~> sinkLocationDIM"
+			]
+		}
+	}
+}
