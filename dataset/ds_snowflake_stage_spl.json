@@ -1,5 +1,5 @@
 {
-	"name": "SnowflakeTable1",
+	"name": "ds_snowflake_stage_spl",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_snowflake_demo",
