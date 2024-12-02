@@ -1,0 +1,53 @@
+{
+	"name": "Parquet2form",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": "snowstagging"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "state_fips",
+				"type": "INT32"
+			},
+			{
+				"name": "state",
+				"type": "UTF8"
+			},
+			{
+				"name": "state_abbr",
+				"type": "UTF8"
+			},
+			{
+				"name": "zipcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "county",
+				"type": "UTF8"
+			},
+			{
+				"name": "city",
+				"type": "UTF8"
+			}
+		]
+	}
+}

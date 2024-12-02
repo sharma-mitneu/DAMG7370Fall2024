@@ -1,0 +1,10 @@
+{
+	"name": "linkedService2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stgblobdamg7370fall24.dfs.core.windows.net/"
+		}
+	}
+}

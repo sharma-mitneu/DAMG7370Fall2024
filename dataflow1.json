@@ -1,0 +1,34 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Parquet_to_form",
+						"type": "DatasetReference"
+					},
+					"name": "parquet"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          License_Issue_Date as string,",
+				"          License_Number as string,",
+				"          Animal_Name as string,",
+				"          Species as string,",
+				"          Primary_Breed as string,",
+				"          Secondary_Breed as string,",
+				"          ZIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> parquet"
+			]
+		}
+	}
+}

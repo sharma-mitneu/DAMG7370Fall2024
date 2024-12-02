@@ -1,0 +1,37 @@
+{
+	"name": "read_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "actor.parquet",
+				"container": "snowstagging"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "actor_id",
+				"type": "INT32"
+			},
+			{
+				"name": "first_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "last_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "last_update",
+				"type": "INT96"
+			}
+		]
+	}
+}
