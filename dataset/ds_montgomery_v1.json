@@ -179,7 +179,7 @@
 		],
 		"typeProperties": {
 			"schema": "STAGING",
-			"table": "STAGE_MONTGOMERY_RAW"
+			"table": "STG_MONTGOMERY_RAW"
 		}
 	}
 }
