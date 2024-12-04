@@ -46,18 +46,14 @@
 			},
 			{
 				"name": "LATITUDE",
-				"type": "FLOAT",
-				"precision": 38,
-				"scale": 0
+				"type": "FLOAT"
 			},
 			{
 				"name": "LONGITUDE",
-				"type": "FLOAT",
-				"precision": 38,
-				"scale": 0
+				"type": "FLOAT"
 			},
 			{
-				"name": "CONTRIBUTING_FACTOR",
+				"name": "CONTRIBUTING_FACTOR_MERGED",
 				"type": "VARCHAR"
 			},
 			{
