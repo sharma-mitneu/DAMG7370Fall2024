@@ -69,12 +69,24 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "SnowflakeV2Sink",
-									"importSettings": {
-										"type": "SnowflakeImportCopyCommand"
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"copyBehavior": "PreserveHierarchy"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
@@ -84,7 +96,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "SnowflakeTable1",
+									"referenceName": "Parquet1",
 									"type": "DatasetReference"
 								}
 							]
@@ -161,8 +173,7 @@
 		],
 		"parameters": {
 			"SName": {
-				"type": "string",
-				"defaultValue": "Customer"
+				"type": "string"
 			}
 		},
 		"variables": {
