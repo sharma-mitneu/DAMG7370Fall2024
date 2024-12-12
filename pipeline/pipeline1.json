@@ -97,7 +97,13 @@
 							"outputs": [
 								{
 									"referenceName": "Parquet1",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@concat(item().tableName,'.parquet')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						},
@@ -158,7 +164,12 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "dataflow1",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"datasetParameters": {
+										"sourceDateset": {
+											"fileName": "@concat(item().tableName,'.parquet')"
+										}
+									}
 								},
 								"compute": {
 									"coreCount": 8,
